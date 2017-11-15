@@ -13,7 +13,12 @@
     $doc=new Docente($conn);
     $id_ = $doc->update($idDocente,$Nombre,$Direccion,$Telefono,$Titulo,$Sexo,$TipoContrato);
 
-    //echo json_decode(array('id'=> $id_));
-    echo json_decode(array('codig'=>$id_));
+/* ----------------realizar pruebas---------------------------------------------------
 
+    $doc=new Docente($conn);
+    $id_ = $doc->update("19","goooo","Arrastradero","000000","dff","Masculino","1");
+    echo $doc->read();
+    //echo json_decode(array('id'=> $id_));
+    //echo json_decode(array('codig'=>$id_));
+*/
  ?>
