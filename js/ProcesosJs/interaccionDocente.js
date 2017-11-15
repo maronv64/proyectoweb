@@ -32,7 +32,7 @@ function CargarTabla(data){
               <td>"+ item.Sexo +"</td> \
               <td>"+ item.idTipoContrato +"</td> \
               <td>"+ item.Descripcion +"</td> \
-              <td><button type='button' class='btn btn-info' onClick='preparaActualizar("+item.idDocente+")'><i class='fa fa-check'></i></button></td>\
+              <td><button type='button' class='btn btn-info' onClick='PrepareDocenteUpdate("+item.idDocente+")'><i class='fa fa-check'></i></button></td>\
               <td><button type='button' class='btn btn-danger' onClick='DocenteDelete("+item.idDocente+")'><i class='fa fa-close'></i></button></td></tr>");
                    
           
@@ -119,6 +119,69 @@ function DocenteInsert(){
             {  
                 DocenteSelect(); 
 
+            }
+		}
+	);
+}
+
+function PrepareDocenteUpdate(id){ 
+    var data = new FormData();
+   // data.append("item",$("#txtBuscar").val());
+    data.append('item',id);
+
+    //alert("puras tonteras..");
+	$.ajax(
+		{
+			url: "ProcesosPHP/DocenteBuscarId.php",
+			type: "POST",             // Type of request to be send, called as method
+            data: data,               // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+            contentType: false,       // The content type used when sending data to the server.
+            cache: false,             // To unable request pages to be cached
+            processData:false, 
+            success: function(requestData)   // A function to be called if request succeeds
+            {  
+                var data = JSON.parse(requestData);
+                //alert("hola"+id);
+                
+                
+                $.each(data, function(i, item) {
+                    $('#txtidDocente').val(item.idDocente);
+                    $('#txtNombre').val(item.Nombre);
+                    $('#txtDireccion').val(item.Direccion);
+                    $('#txtTelefono').val(item.Telefono);
+                    $('#txtTitulo').val(item.Titulo);
+                    $('#cmbSexo').val(item.Sexo);
+                    $('#cmbDescripcion').val(item.idTipoContrato);
+                });
+                
+            }
+		}
+	);
+}
+
+function DocenteUpdate(){ 
+    var data = new FormData();
+   // data.append("item",$("#txtBuscar").val());
+    data.append('idDocente',$('#txtidDocente').val());
+    data.append('nombre',$('#txtNombre').val());
+    data.append('direccion',$('#txtDireccion').val());
+    data.append('telefono',$('#txtTelefono').val());
+    data.append('titulo',$('#txtTitulo').val());
+    data.append('sexo',$('#cmbSexo').val());
+    data.append('descripcion',$('#cmbDescripcion').val());
+
+    alert("Actualizacion realizada..");
+	$.ajax(
+		{
+			url: "ProcesosPHP/DocenteUpdate.php",
+			type: "POST",             // Type of request to be send, called as method
+            data: data,               // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+            contentType: false,       // The content type used when sending data to the server.
+            cache: false,             // To unable request pages to be cached
+            processData:false, 
+            success: function(requestData)   // A function to be called if request succeeds
+            {  
+                DocenteSelect(); 
             }
 		}
 	);

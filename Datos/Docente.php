@@ -269,6 +269,53 @@ class Docente{
 						print $e->getMessage();
 					}
 	}
-
+	function BuscarId($item){
+		$consulta = "
+		
+								SELECT `Docente`.`idDocente`,
+								`Docente`.`Nombre`,
+								`Docente`.`Direccion`,
+								`Docente`.`Telefono`,
+								`Docente`.`Titulo`,
+								`Docente`.`Sexo`,
+								`Docente`.`idTipoContrato`,
+								`TipoContrato`.`Descripcion`
+									FROM `practicaweb`.`Docente` inner join `practicaweb`.`TipoContrato`
+										on `Docente`.`idTipoContrato`=`TipoContrato`.`idTipoContrato`
+										where `Docente`.`idDocente` = '".$item."'
+										;
+							";
+		
+		
+					try {
+						
+						$sentencia = $this->db->prepare($consulta,array(PDO::ATTR_CURSOR=>PDO::CURSOR_SCROLL));
+						$sentencia->execute();
+		
+						$objDocente = array();
+		
+						while ($fila=$sentencia->fetch(PDO::FETCH_NUM,PDO::FETCH_ORI_NEXT)) {
+							# code...
+							$Docente= array();
+		
+							$Docente['idDocente']=$fila[0];
+							$Docente['Nombre']=$fila[1];
+							$Docente['Direccion']=$fila[2];
+							$Docente['Telefono']=$fila[3];
+							$Docente['Titulo']=$fila[4];
+							$Docente['Sexo']=$fila[5];
+							$Docente['idTipoContrato']=$fila[6];
+							$Docente['Descripcion']=$fila[7];
+		
+							$objDocente[]=$Docente;
+		
+						}
+		
+						return json_encode($objDocente);
+		
+					} catch (PDOException $e) {
+						print $e->getMessage();
+					}
+	}
 }
  ?>

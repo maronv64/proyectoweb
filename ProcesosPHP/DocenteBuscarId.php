@@ -5,7 +5,8 @@
     $v=$_POST["item"];
     
     $doc=new Docente($conn);
-   
-    echo $doc->BuscarItem($v);
+    //echo $doc->read();
+
+    echo $doc->BuscarId($v);
     
  ?>
