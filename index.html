@@ -184,7 +184,7 @@
            
           </div>
           <buttom onclick="DocenteInsert()" value="Guardar" class="btn btn-block btn-primary">Guardar</buttom>
-          <buttom onclick="DocenteUpdate()" value="Actualizar" class="btn btn-block btn-secondary">Actualizar</buttom>
+          <buttom id="btnActualizar" onclick="DocenteUpdate()" value="Actualizar" class="btn btn-block btn-secondary">Actualizar</buttom>
         </form>
       </div>
     </div><br>
@@ -199,7 +199,7 @@
           <button onClick="DocenteSelect()" class="btn btn btn-primary">Mostrar </button>  
         
         </div>
-        <div class="card-body">
+        <div id="dgvPadre" class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered table-responsive" id="dataTabl" width="100%" cellspacing="0">
               <thead>
@@ -209,17 +209,16 @@
                   <th>Telefono</th>
                   <th>Titulo</th>
                   <th>Sexo</th>
-                  <th>idTipoContrato</th>
+                  <th id="idTipoCon">idTipoContrato</th>
                   <th>Tipo de Contrato</th>
                   <th colspan="2" >Acciones</th>
                 </tr>
               </thead>
               
-              <tbody id="dgvConsulta">
-                
-                
+              <tbody id="dgvConsulta">                
                 
               </tbody>
+
             </table>
           </div>
         </div>

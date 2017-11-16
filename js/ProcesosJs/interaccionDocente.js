@@ -13,7 +13,9 @@ function DocenteSelect(){
             success: function(requestData)   // A function to be called if request succeeds
             {
                 var data = JSON.parse(requestData);  
-                CargarTabla(data);        
+                CargarTabla(data);
+                $('#idTipoCon').hide();
+                $('#dgvPadre').show();         
             }
 		}
 	);
@@ -153,7 +155,9 @@ function PrepareDocenteUpdate(id){
                     $('#cmbSexo').val(item.Sexo);
                     $('#cmbDescripcion').val(item.idTipoContrato);
                 });
-                
+                //$('#btnActualizar').attr("class","btn-success btn-block")
+                //$('#btnActualizar').animate({backcolor:red});
+                $('#dgvPadre').hide();
             }
 		}
 	);
@@ -181,7 +185,8 @@ function DocenteUpdate(){
             processData:false, 
             success: function(requestData)   // A function to be called if request succeeds
             {  
-                DocenteSelect(); 
+                DocenteSelect();
+                
             }
 		}
 	);
